@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
+import { CssBaseline, ThemeProvider as MaterialThemeProvider, StyledEngineProvider } from '@mui/material'
+import { Router } from 'router'
 
-function App() {
+import { theme } from 'themes/main'
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <StyledEngineProvider injectFirst>
+      <MaterialThemeProvider theme={theme}>
+        <EmotionThemeProvider theme={theme}>
+          <CssBaseline />
+          <Router />
+        </EmotionThemeProvider>
+      </MaterialThemeProvider>
+    </StyledEngineProvider>
+  )
 }
-
-export default App;
