@@ -136,7 +136,7 @@ theme.components = {
   MuiPaper: {
     styleOverrides: {
       root: {
-        backgroundColor: theme.palette.primary.main,
+        // backgroundColor: theme.palette.primary.main,
       },
     },
   },

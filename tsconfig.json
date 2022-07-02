@@ -22,8 +22,6 @@
     "strictNullChecks": true,
     "allowUnreachableCode": false,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "incremental": true
   },
   "exclude": [
