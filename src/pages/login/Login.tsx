@@ -1,25 +1,18 @@
-import { CardMedia } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
-import MobileStepper from '@material-ui/core/MobileStepper'
-import Paper from '@material-ui/core/Paper'
-import { useTheme } from '@material-ui/core/styles'
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
-import { Box, Grid, Typography } from '@mui/material'
-import MuiImageSlider from 'mui-image-slider'
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
+import { Button, MobileStepper, useTheme } from '@mui/material'
 import React from 'react'
 
-import Image1 from '../../assets/login1.jpg'
-import Image2 from '../../assets/login2.jpg'
-import Image3 from '../../assets/login3.jpg'
-import Image4 from '../../assets/login4.png'
-import Image5 from '../../assets/login5.jpg'
-import Image6 from '../../assets/login6.jpg'
-import Image7 from '../../assets/login7.jpg'
-import Image8 from '../../assets/login8.jpg'
-import Image9 from '../../assets/login9.jpg'
-import Image10 from '../../assets/login10.jpg'
-import Image11 from '../../assets/login11.jpg'
+import Image1 from 'assets/login1.jpg'
+import Image2 from 'assets/login2.jpg'
+import Image3 from 'assets/login3.jpg'
+import Image4 from 'assets/login4.png'
+import Image5 from 'assets/login5.jpg'
+import Image6 from 'assets/login6.jpg'
+import Image7 from 'assets/login7.jpg'
+import Image8 from 'assets/login8.jpg'
+import Image9 from 'assets/login9.jpg'
+import Image10 from 'assets/login10.jpg'
+import Image11 from 'assets/login11.jpg'
 
 const MyCollection = [
   {
@@ -126,29 +119,4 @@ export const Login = () => {
       </div>
     </div>
   )
-  // <Grid>
-  //   <MuiImageSlider images={images} />
-  //   <Box
-  //     className="Image"
-  //     style={{
-  //       backgroundImage: `url(${Image})`,
-  //       backgroundSize: 'cover',
-  //       height: '100vh',
-  //     }}
-  //   ></Box>
-
-  //   <CardMedia
-  //     onClick={() => {
-  //       changeImage
-  //     }}
-  //     className="Arrow"
-  //     component={'img'}
-  //     src={Arrow}
-  //     style={{
-  //       height: 100,
-  //       width: 100,
-  //     }}
-  //   ></CardMedia>
-  // </Grid>
-  //)
 }
