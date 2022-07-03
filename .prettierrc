@@ -6,7 +6,7 @@
   "trailingComma": "all",
   "singleQuote": true,
   "bracketSpacing": true,
-  "importOrder": ["^pages/(.*)$", "^types/(.*)$", "^hooks/(.*)$", "^themes/(.*)$", "^[./]"],
+  "importOrder": ["^pages/(.*)$", "^components/(.*)$", "^types/(.*)$", "^hooks/(.*)$", "^themes/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrderCaseInsensitive": false
