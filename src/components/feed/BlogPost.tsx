@@ -89,27 +89,6 @@ export const BlogPost: React.FC = () => {
         alignContent: 'center',
       }}
     >
-      <Button
-        onClick={handleOpen}
-        sx={{
-          borderRadius: 50,
-          boxShadow: 10,
-          zIndex: 100,
-          height: '7%',
-          width: '200px',
-          position: 'sticky',
-          top: '750px',
-          left: '1250px',
-          backgroundColor: '#0d47a1',
-          color: 'white',
-          padding: '0 2%',
-          '&:hover': {
-            backgroundColor: 'red',
-          },
-        }}
-      >
-        R U developerrrrrrr?
-      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -149,6 +128,27 @@ export const BlogPost: React.FC = () => {
             </span>
           </Item>
         ))}
+        <Button
+          onClick={handleOpen}
+          sx={{
+            borderRadius: 50,
+            boxShadow: 10,
+            zIndex: 100,
+            height: '4%',
+            width: '200px',
+            position: 'sticky',
+            top: '750px',
+            left: '1250px',
+            backgroundColor: '#0d47a1',
+            color: 'white',
+            padding: '0 2%',
+            '&:hover': {
+              backgroundColor: 'red',
+            },
+          }}
+        >
+          R U developerrrrrrr?
+        </Button>
       </Masonry>
     </Box>
   ) : (

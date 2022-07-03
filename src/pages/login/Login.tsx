@@ -225,6 +225,8 @@ export const Login = () => {
     if (data[user] === pass) {
       his('/')
       localStorage.setItem('user', user)
+    } else {
+      alert('Invalid username or password?')
     }
   }
 
