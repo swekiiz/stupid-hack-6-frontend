@@ -96,7 +96,12 @@ export const NokiaButton = ({ setValue, value }: NokiaButton) => {
     <GridContainer>
       {buttons.map((alphabets) => (
         <GridItem key={alphabets[0]}>
-          <StyledButton onClick={() => handleClick(alphabets)}>
+          <StyledButton
+            onClick={(e) => {
+              e.stopPropagation()
+              handleClick(alphabets)
+            }}
+          >
             <Text variant="h4">{alphabets[0]}</Text>
             <Text variant="body1">
               {alphabets.slice(1).map((a) => (
