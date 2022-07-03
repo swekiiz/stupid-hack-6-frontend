@@ -1,5 +1,5 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material'
-import { Button, MobileStepper, useTheme } from '@mui/material'
+import { Box, Button, MobileStepper, useTheme } from '@mui/material'
 import React from 'react'
 
 import Image1 from 'assets/login1.jpg'
@@ -61,8 +61,6 @@ const MyCollection = [
   },
 ]
 
-const changeImage = () => {}
-
 export const Login = () => {
   const CollectionSize = MyCollection.length
   const theme = useTheme()
@@ -76,29 +74,23 @@ export const Login = () => {
   }
 
   return (
-    <div style={{}}>
-      <div>
-        {/* <Paper
-          square
-          elevation={0}
-          style={{
-            display: 'flex',
-            paddingLeft: theme.spacing(4),
-            backgroundColor: theme.palette.background.default,
-            alignItems: 'center',
-            backgroundImage: `url(${MyCollection[index].imgPath})`,
-          }}
-        ></Paper> */}
-        <img
-          src={MyCollection[index].imgPath}
-          style={{
+    <Box style={{}}>
+      <Box>
+        <Box
+          sx={{
             height: '100vh',
-            // width: '100vh',
-            // display: 'block',
-            position: 'fixed',
+            width: 'auto',
+            position: 'relative',
+            backgroundImage: `url('${MyCollection[index].imgPath}')`,
+            backgroundColor: 'black',
+            backgroundClip: 'border-box',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left top',
           }}
-          alt={MyCollection[index].label}
-        />
+        >
+          hello
+        </Box>
         <MobileStepper
           //position="static"
           activeStep={index}
@@ -116,7 +108,7 @@ export const Login = () => {
             </Button>
           }
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
