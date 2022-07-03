@@ -71,7 +71,6 @@ export const BlogPost: React.FC = () => {
             {/* {index + 1}
             <Typography sx={{ color: 'black' }}>{heights[index % 15]}</Typography> */}
             <img src={image.img} style={{ width: '100%' }} />
-
             <span style={{ color: 'black', wordBreak: 'break-word', display: 'block', textAlign: 'left' }}>
               {image.description}
             </span>
