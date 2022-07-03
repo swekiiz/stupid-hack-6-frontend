@@ -1,13 +1,29 @@
 import Masonry from '@mui/lab/Masonry'
 import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
+import Modal from '@mui/material/Modal'
 import Paper from '@mui/material/Paper'
 import { styled } from '@mui/material/styles'
-import TempImage from 'assets/TempImg'
+import zIndex from '@mui/material/styles/zIndex'
 import axios from 'axios'
 import { config } from 'config'
 import { useEffect, useState } from 'react'
+
+import TempImage from 'assets/TempImg'
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f0f0f0',
@@ -59,6 +75,10 @@ export const BlogPost: React.FC = () => {
     }
   }
 
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return didFetchPost ? (
     <Box
       sx={{
@@ -69,9 +89,55 @@ export const BlogPost: React.FC = () => {
         alignContent: 'center',
       }}
     >
+      <Button
+        onClick={handleOpen}
+        sx={{
+          borderRadius: 50,
+          boxShadow: 10,
+          zIndex: 100,
+          height: '7%',
+          width: '200px',
+          position: 'sticky',
+          top: '750px',
+          left: '1250px',
+          backgroundColor: '#0d47a1',
+          color: 'white',
+          padding: '0 2%',
+          '&:hover': {
+            backgroundColor: 'red',
+          },
+        }}
+      >
+        R U developerrrrrrr?
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <textarea
+              placeholder="."
+              value={command}
+              onChange={(e) => setCommand(e.target.value)}
+              style={{ width: '100%' }}
+            ></textarea>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                fetchPost()
+              }}
+            >
+              Send
+            </Button>
+          </Typography>
+        </Box>
+      </Modal>
       <Masonry columns={3} spacing={7}>
         {posts.map((e, index) => (
-          <Item key={index} sx={{ padding: '1%' }}>
+          <Item key={index} sx={{ padding: '1%', zindex: -1, position: 'relative' }}>
             <Typography variant="h6" mb={2} sx={{ color: 'black', fontWeight: '600', letterSpacing: 1 }}>
               {e.owner}
             </Typography>
