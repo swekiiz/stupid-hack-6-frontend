@@ -147,6 +147,15 @@ theme.components = {
       },
     },
   },
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        width: '100%',
+      },
+    },
+  },
   MuiDialog: {
     styleOverrides: {
       paper: {

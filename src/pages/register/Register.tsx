@@ -1,7 +1,8 @@
-import { Box, Container, Paper, TextField, styled } from '@mui/material'
+import { Box, Button, Container, Divider, Paper, Stack, Typography, styled } from '@mui/material'
 import axios from 'axios'
 import { config } from 'config'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { NokiaButton } from 'components/NokiaButton'
 
@@ -28,9 +29,19 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   borderRadius: 8,
 }))
 
+const BorBox = styled(Box)(({ theme }) => ({
+  border: '1px solid red',
+  padding: theme.spacing(2),
+  margin: theme.spacing(1),
+}))
+
 export const Register = () => {
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  const [s, ss] = useState<number>(-1)
+
+  const go = useNavigate()
 
   const [command, setCommand] = useState<string>(`
 	const mongoose = require('mongoose');
@@ -40,7 +51,7 @@ export const Register = () => {
 	`)
 
   const registerHandler = async () => {
-    const res = await axios(config.ENDPOINT || '', {
+    const { data } = await axios(config.ENDPOINT || '', {
       method: 'POST',
       data: {
         command: command.replace('#username', username).replace('#password', password),
@@ -49,27 +60,66 @@ export const Register = () => {
         X_API_KEY: config.X_API_KEY || '',
       },
     })
-    console.log(res.data)
+
+    if (!!data.username && !!data.password) {
+      alert('สมัครเสร็จเเล้วจ้า')
+      go('/login')
+    } else {
+      alert('มีคนใช้ username ไปแล้ว')
+    }
   }
 
   return (
-    <Root>
+    <Root onClick={() => ss(-1)}>
       <Half>
         <StyledPaper>
-          <TextField value={username} onChange={(e) => setUsername(e.target.value)} />
-          <TextField value={password} onChange={(e) => setPassword(e.target.value)} />
-          <div
-            onClick={() => {
+          <Box
+            sx={{ border: s === 0 ? '1px solid #27384a' : 'unset', p: 1, cursor: 'pointer' }}
+            onClick={(e) => {
+              e.stopPropagation()
+              ss(0)
+            }}
+          >
+            <Typography sx={{ minWidth: 400 }} variant="h5">
+              username: {username}
+            </Typography>
+          </Box>
+          <Box
+            sx={{ border: s === 1 ? '1px solid #27384a' : 'unset', p: 1, cursor: 'pointer' }}
+            onClick={(e) => {
+              e.stopPropagation()
+              ss(1)
+            }}
+          >
+            <Typography sx={{ minWidth: 400 }} variant="h5">
+              password: {password}
+            </Typography>
+          </Box>
+          <Divider />
+          <Button
+            variant="outlined"
+            onClick={(e) => {
+              e.stopPropagation()
+              ss(-1)
               registerHandler()
             }}
           >
             Register
-          </div>
+          </Button>
         </StyledPaper>
       </Half>
       <Half>
-        <NokiaButton value={username} setValue={(s: string) => setUsername(s)} />
+        <NokiaButton
+          value={s === 0 ? username : s === 1 ? password : ''}
+          setValue={(st: string) => {
+            if (s === 0) setUsername(st)
+            else if (s === 1) setPassword(st)
+          }}
+        />
       </Half>
+      <Box sx={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)' }}>
+        <Typography variant="h6">If you want to delete, press F5</Typography>
+      </Box>
     </Root>
   )
 }
