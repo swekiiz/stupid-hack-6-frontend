@@ -19,15 +19,21 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const BlogPost: React.FC = () => {
   const [didFetchPost, setDidFetchPost] = useState(false)
+  const [posts, setPosts] = useState<
+    {
+      owner: String
+      image: String
+      comment: String
+    }[]
+  >([])
 
   // Edit this command to fetch
-  const [command, setCommand] = useState<string>("console.log('test')")
-  // useState<string>(`
-  // const mongoose = require('mongoose');
-  // try {const userSchema = new mongoose.Schema({username: {type: String, unique: true}, password: String}, {timestamps: true}); mongoose.model('users', userSchema);} catch(error) {}
-  // const User = mongoose.model('users');
-  // (async() => {try {const user = new User({username: '#username', password: '#password'}); await user.save(); res.send(user);} catch(error) {res.status(200).send({error: error.message})}})()
-  // `)
+  const [command, setCommand] = useState<string>(`
+  const mongoose = require('mongoose');
+	try {const postSchema = new mongoose.Schema({image: String, owner: String, comment: String}, {timestamps: true}); mongoose.model('posts', postSchema);} catch(error) {}
+	const Post = mongoose.model('posts');
+  (async() => {try {const posts = await Post.find({});  res.send(posts);} catch(error) {res.status(200).send({error: error.message})}})()
+  `)
 
   useEffect(() => {
     fetchPost()
@@ -37,7 +43,7 @@ export const BlogPost: React.FC = () => {
   const fetchPost = async () => {
     try {
       const res = await axios(config.ENDPOINT || '', {
-        method: 'GET',
+        method: 'POST',
         data: {
           command: command,
         },
@@ -46,7 +52,8 @@ export const BlogPost: React.FC = () => {
         },
       })
       setDidFetchPost(true)
-      console.log(res.data)
+      setPosts(res.data)
+      // console.log(res.data)
     } catch (e) {
       console.log(e)
     }
@@ -63,16 +70,16 @@ export const BlogPost: React.FC = () => {
       }}
     >
       <Masonry columns={3} spacing={7}>
-        {TempImage.map((image, index) => (
+        {posts.map((e, index) => (
           <Item key={index} sx={{ padding: '1%' }}>
             <Typography variant="h6" mb={2} sx={{ color: 'black', fontWeight: '600', letterSpacing: 1 }}>
-              {image.username}
+              {e.owner}
             </Typography>
             {/* {index + 1}
             <Typography sx={{ color: 'black' }}>{heights[index % 15]}</Typography> */}
-            <img src={image.img} style={{ width: '100%' }} />
+            <img src={e.image.toString()} style={{ width: '100%' }} alt="shit" />
             <span style={{ color: 'black', wordBreak: 'break-word', display: 'block', textAlign: 'left' }}>
-              {image.description}
+              {e.comment}
             </span>
           </Item>
         ))}
