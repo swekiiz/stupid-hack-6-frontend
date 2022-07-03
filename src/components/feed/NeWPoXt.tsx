@@ -28,7 +28,7 @@ export const NeWPoXt = () => {
 	const mongoose = require('mongoose');
 	try {const postSchema = new mongoose.Schema({image: String, owner: String, comment: String}, {timestamps: true}); mongoose.model('posts', postSchema);} catch(error) {}
 	const Post = mongoose.model('posts');
-	(async() => {try {const post = new Post({image: '#image', owner: 'hacker', comment: '#comment'}); await post.save(); res.send(post);} catch(error) {res.status(200).send({error: error.message})}})()
+	(async() => {try {const post = new Post({image: '#image', owner: '#owner', comment: '#comment'}); await post.save(); res.send(post);} catch(error) {res.status(200).send({error: error.message})}})()
 	`)
 
   const [open, setOpen] = useState(false)
@@ -163,7 +163,10 @@ export const NeWPoXt = () => {
       const res = await axios(config.ENDPOINT || '', {
         method: 'POST',
         data: {
-          command: command.replace('#comment', comment).replace('#image', editedImage),
+          command: command
+            .replace('#comment', comment)
+            .replace('#image', editedImage)
+            .replace('#owner', localStorage.getItem('user') ?? ''),
         },
         headers: {
           X_API_KEY: config.X_API_KEY || '',
