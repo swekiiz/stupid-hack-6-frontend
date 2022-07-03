@@ -93,7 +93,7 @@ export const NokiaButton = ({ setValue, value }: NokiaButton) => {
   }
 
   return (
-    <GridContainer>
+    <GridContainer onClick={(e) => e.stopPropagation()}>
       {buttons.map((alphabets) => (
         <GridItem key={alphabets[0]}>
           <StyledButton

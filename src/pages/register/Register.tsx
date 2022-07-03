@@ -119,6 +119,9 @@ export const Register = () => {
       </Half>
       <Box sx={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)' }}>
         <Typography variant="h6">If you want to delete, press F5</Typography>
+        <Typography variant="h6" color="red">
+          password encription: plain text
+        </Typography>
       </Box>
     </Root>
   )

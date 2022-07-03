@@ -1,4 +1,10 @@
-import { KeyboardArrowLeft, KeyboardArrowRight, SpaceBar } from '@mui/icons-material'
+import {
+  ArrowBackIosNewSharp,
+  ArrowRightAlt,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  SpaceBar,
+} from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -9,6 +15,7 @@ import {
   Select,
   SelectChangeEvent,
   Typography,
+  styled,
   useTheme,
 } from '@mui/material'
 import axios from 'axios'
@@ -150,6 +157,26 @@ const hihi: {
   },
 ]
 
+const Img = styled('img')(() => ({
+  position: 'relative',
+  top: 30,
+  '@keyframes xxx': {
+    '0%': {
+      opacity: 1,
+      transform: 'rotate(-90deg)',
+    },
+    '50%': {
+      opacity: 0,
+      transform: 'rotate(-90deg)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'rotate(-90deg)',
+    },
+  },
+  animation: 'xxx 1s infinite ease-in',
+}))
+
 export const Login = () => {
   const [index, setActiveStep] = useState<number>(0)
 
@@ -208,9 +235,7 @@ export const Login = () => {
 
   //   useEffect(() => console.log('data', data), [data])
 
-  const CollectionSize = MyCollection.length
-
-  const his = useNavigate()
+  const go = useNavigate()
 
   const theme = useTheme()
 
@@ -223,7 +248,7 @@ export const Login = () => {
 
   const clickkub = () => {
     if (data[user] === pass) {
-      his('/')
+      go('/')
       localStorage.setItem('user', user)
     } else {
       alert('Invalid username or password?')
@@ -232,18 +257,60 @@ export const Login = () => {
 
   return (
     <Box>
-      <Button
-        variant="contained"
+      <Box
         sx={{
           position: 'fixed',
           top: 10,
           left: 10,
           zIndex: 696969,
         }}
-        onClick={clickkub}
       >
-        Login
-      </Button>
+        <Button variant="contained" onClick={clickkub}>
+          Login
+        </Button>
+        <Box>
+          <Img src="hi.png" width="100px" />
+          <Typography
+            align="center"
+            sx={{
+              pt: 6,
+              fontSize: 20,
+              background: '-webkit-linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Use this
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 10,
+          right: 10,
+          zIndex: 696969,
+        }}
+      >
+        <Button variant="contained" onClick={() => go('/register')}>
+          Register
+        </Button>
+        <Box>
+          <Img src="hi.png" width="100px" />
+          <Typography
+            align="center"
+            sx={{
+              pt: 6,
+              fontSize: 20,
+              background: '-webkit-linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Use this
+          </Typography>
+        </Box>
+      </Box>
       <Box>
         <Box
           sx={{
@@ -359,7 +426,7 @@ export const Login = () => {
         </Box>
         <MobileStepper
           activeStep={index}
-          steps={CollectionSize}
+          steps={MyCollection.length}
           backButton={
             <Button size="small" onClick={goToBackPicture} disabled={index === 0}>
               back
@@ -367,7 +434,7 @@ export const Login = () => {
             </Button>
           }
           nextButton={
-            <Button size="small" onClick={goToNextPicture} disabled={index === CollectionSize - 1}>
+            <Button size="small" onClick={goToNextPicture} disabled={index === MyCollection.length - 1}>
               Next
               {theme.direction !== 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
             </Button>
